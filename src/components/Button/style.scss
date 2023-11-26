@@ -1,0 +1,32 @@
+@mixin button {
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.filled-btn {
+  background-color: #002884;
+  color: white;
+  border: none;
+  @include button;
+}
+
+.outlined-btn {
+  color: #002884;
+  border: 1px solid #002884;
+  background-color: white;
+  @include button;
+}
+
+.ghost-btn {
+  color: #002884;
+  font-size: medium;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+}
+
+.filled-btn:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,56 @@
+.nav-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-inline: 40px;
+  margin-top: 15px;
+}
+
+.nav-qr {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.title {
+  font-size: 17px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #002884;
+}
+
+/* style.scss */
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  /* Other styles... */
+
+  /* Media query for responsive design */
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+
+    .nav-qr {
+      margin-top: 1rem;
+    }
+
+    .btn-group {
+      margin-top: 1rem;
+      display: flex;
+
+      div {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+/* Other styles... */

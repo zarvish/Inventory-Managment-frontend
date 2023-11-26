@@ -1,0 +1,123 @@
+/* Example CSS for SignIn component */
+.generate-qr-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #666666;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type="date"],
+input[type="number"],
+input[type="text"] {
+  width: 95%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+}
+
+button {
+  background-color: #002884;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.register-link,
+.login-link {
+  text-align: center;
+}
+
+.register-link a,
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.register-link a:hover,
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+// scan qr
+/* ScanQR.css */
+
+.scan-qr-container {
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.qr-scanner {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.file-input {
+  display: none;
+}
+
+.custom-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #002884;
+  color: #fff;
+  margin: 5px;
+}
+
+.custom-btn:hover {
+  background-color: #0056b3;
+}
+
+.custom-btn:active {
+  transform: translateY(1px);
+}
