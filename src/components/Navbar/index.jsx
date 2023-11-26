@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.scss";
 import Button from "../Button";
 import Text from "../Text";
 import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove the token from local storage
+    setIsLoggedIn(false);
+    navigate("/");
+  };
+
   return (
     <div className="nav-container">
       <p className="title" onClick={() => navigate("/")}>
@@ -24,7 +41,7 @@ const Navbar = () => {
         />
       </div>
       {isLoggedIn ? (
-        <Button title="Logout" type="filled" />
+        <Button title="Logout" type="filled" onClick={handleLogout} />
       ) : (
         <div className="btn-group">
           <div>

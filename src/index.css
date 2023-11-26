@@ -18,3 +18,21 @@ code {
   font-weight: 400;
   background-color: white;
 }
+
+.error-message {
+  color: #fff;
+  background-color: #ff7167;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.success-message {
+  color: #fff;
+  background-color: #0ad052;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10px;
+}

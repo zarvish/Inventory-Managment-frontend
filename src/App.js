@@ -7,6 +7,8 @@ import SignIn from "./Authentication/SignIn";
 import Register from "./Authentication/Register";
 import GenerateQR from "./QrCode/GenerateQR";
 import ScanQR from "./QrCode/ScanQR";
+import EditInventory from "./QrCode/EditInventory";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return (
@@ -16,8 +18,31 @@ function App() {
         <Route path="/" element={<InventoryTable />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/generate-qr-code" element={<GenerateQR />} />
-        <Route path="/scan-qr-code" element={<ScanQR />} />
+        {/* protected routes */}
+        <Route
+          path="/generate-qr-code"
+          element={
+            <PrivateRoute>
+              <GenerateQR />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/scan-qr-code"
+          element={
+            <PrivateRoute>
+              <ScanQR />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/edit-inventory"
+          element={
+            <PrivateRoute>
+              <EditInventory />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );

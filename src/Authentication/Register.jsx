@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import api from "../instance/api"; // Import the api.js file
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // State to manage error message
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -14,11 +17,18 @@ const Register = () => {
         email,
         password,
       });
-      console.log(response); // Log the response
-      // Optionally, you can redirect the user or perform other actions upon successful registration
+      navigate("/sign-in"); // Redirect on successful registration
     } catch (error) {
-      console.error(error.response.data); // Log the error response
-      // Handle errors or display error messages to the user
+      console.log(error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message); // Set the error message from the response
+      } else {
+        setError("Registration failed. Please try again."); // Set a generic error message
+      }
     }
   };
 
@@ -59,6 +69,7 @@ const Register = () => {
           Register
         </button>
       </form>
+      {error && <p className="error-message">{error}</p>}
       <p className="login-link">
         Already have an account? <a href="/sign-in">Sign In</a>
       </p>

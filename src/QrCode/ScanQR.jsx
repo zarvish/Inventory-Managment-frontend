@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import QrReader from "react-qr-scanner";
 import QrScanner from "qr-scanner";
+import api from "../instance/api";
 
 const ScanQR = () => {
   const [result, setResult] = useState("");
@@ -10,6 +11,7 @@ const ScanQR = () => {
     console.log(data);
     if (data) {
       const json = JSON.parse(data.text);
+      handleEdit(json._id);
       setResult(json._id);
       setScanning(false);
     }
@@ -17,6 +19,17 @@ const ScanQR = () => {
 
   const handleError = (err) => {
     console.error(err);
+  };
+
+  const handleEdit = async (id) => {
+    try {
+      const response = await api.put(`api/update-inventory/${id}`, {
+        type: "random",
+      });
+    } catch (error) {
+      console.error("Error fetching inventory data:", error);
+      // Handle errors if needed
+    }
   };
 
   const handleFileUpload = (event) => {
@@ -28,6 +41,7 @@ const ScanQR = () => {
         let data = JSON.stringify(result);
         data = JSON.parse(result);
         console.log(data);
+        handleEdit(data._id);
         setResult(data._id);
       })
       .catch((error) => {

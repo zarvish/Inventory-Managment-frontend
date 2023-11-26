@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import api from "../instance/api"; // Import the api.js file
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
-const GenerateQR = () => {
+import { useLocation } from "react-router-dom";
+const EditInventory = () => {
   const navigate = useNavigate();
-  const [selectedName, setSelectedName] = useState("");
-  const [date, setDate] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const location = useLocation();
+  const data = location?.state?.data;
+
+  console.log("state: ", data);
+  const [selectedName, setSelectedName] = useState(data.name);
+  const [date, setDate] = useState(data.date.received_date.split("T")[0]);
+  const [quantity, setQuantity] = useState(data.quantity.received_quantity);
   const [error, setError] = useState("");
 
-  const handleGenerateQR = async (e) => {
+  const handleEditInventory = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      const response = await api.post("/api/create-inventory", {
+      const response = await api.put(`/api/update-inventory/${data._id}`, {
         name: selectedName,
         received_date: date,
         received_quantity: quantity,
@@ -28,7 +33,7 @@ const GenerateQR = () => {
       ) {
         setError(error.response.data.message);
       } else {
-        setError("Failed to generate QR. Please try again.");
+        setError("Failed to Update");
       }
     }
   };
@@ -39,9 +44,9 @@ const GenerateQR = () => {
 
   return (
     <div className="generate-qr-container">
-      <h2>Generate QR Code</h2>
-      <p>Fill in the details to generate a QR code</p>
-      <form onSubmit={handleGenerateQR}>
+      <h2>Edit</h2>
+      <p>Fill in the details for update the item</p>
+      <form onSubmit={handleEditInventory}>
         <div className="input-container">
           <select
             required
@@ -79,11 +84,11 @@ const GenerateQR = () => {
         </div>
         {error && <div className="error-message">{error}</div>}
         <button className="custom-btn" type="submit">
-          Generate QR
+          Update
         </button>
       </form>
     </div>
   );
 };
 
-export default GenerateQR;
+export default EditInventory;
