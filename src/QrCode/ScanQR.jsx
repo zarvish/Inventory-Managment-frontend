@@ -5,15 +5,25 @@ import api from "../instance/api";
 
 const ScanQR = () => {
   const [result, setResult] = useState("");
+  const [error, setError] = useState("");
   const [scanning, setScanning] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleScan = (data) => {
-    console.log(data);
+    setError("");
     if (data) {
+      setMessage("");
+      console.log(data);
       const json = JSON.parse(data.text);
+      // console.log("id is ", json._id);
+      if (!json._id) {
+        setError("Invalid Qr code");
+      }
       handleEdit(json._id);
       setResult(json._id);
       setScanning(false);
+    } else {
+      setMessage("scanning...");
     }
   };
 
@@ -40,11 +50,14 @@ const ScanQR = () => {
       .then((result) => {
         let data = JSON.stringify(result);
         data = JSON.parse(result);
-        console.log(data);
+        if (!data._id) {
+          setError("Invalid Qr");
+        }
         handleEdit(data._id);
         setResult(data._id);
       })
       .catch((error) => {
+        setError("invalid qr code");
         console.error(error);
       });
   };
@@ -88,6 +101,10 @@ const ScanQR = () => {
         Scanned Result:{" "}
         {result ? (
           <a href={`/?id=${result}`}>{result}</a>
+        ) : error ? (
+          <p className="error-message">{error}</p>
+        ) : message ? (
+          <p className="success-message">{message}</p>
         ) : (
           "No QR code scanned yet"
         )}
